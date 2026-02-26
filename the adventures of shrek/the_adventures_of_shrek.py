@@ -166,6 +166,13 @@ class Player:
                         print("you have been defeated")
                     else:
                         print("no such monster here")
+
+class Potion(Item):
+    def use(self):
+        global Player
+        print("you uncork the potion and drint deeply - warmth spreads through your body as your wounds begin to close.")
+        Player.heal(Player.max_health)
+        Player.inventory.remove(self)
          
 
      
