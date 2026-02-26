@@ -1,13 +1,13 @@
 import random
 
 class Weapon:
-def __init__(self, name, description, power):
-        self.name = name
-        self.description = description
-        self.power = power
+    def __init__(self, name, description, power):
+            self.name = name
+            self.description = description
+            self.power = power
 
-def __str__(self):
-        return f"{self.name}: {self.description} (Power: {self.power})"
+    def __str__(self):
+            return f"{self.name}: {self.description} (Power: {self.power})"
 
 class Sheild:
     def __init__(self, name, description, defense):
@@ -92,3 +92,69 @@ class Player:
             print(f"you pick up the {item.name}.")
             return
     print(f"There is no such item here.")
+
+    def drop(self, item_name):
+            for item in self.inventory:
+                if item.name.lower() == item_name.lower():
+                    if type(item) == Sheild:
+                        self.defense = 0
+                    if type(item) == Weapon:
+                        self.attack = 1
+                    self.inventory.remove(item)
+                    self.location.items.append(item)
+                    print(f"you drop up the {item.name}.")
+                    return
+
+    def use(self, item_name):
+            for item in self.inventory:
+                if item.name.lower() == item_name.lower():
+                   item.use()
+                   return
+
+            print(f"you have no such item")
+
+    def stats(self):
+        print(f"HEALTH: {self.health}")
+        print(f"ATTACK: {self.attack}")
+        print(f"DEFENSE: {self.defense}")
+
+    def show_inventory(self):
+        if len(self.inventory) == 0:
+            print("your inventory is empty.")
+        else:
+            print("you are carrying:")
+            for item in self.inventory:
+                print(f" - {item}")
+
+    def attack_monster(self, monster_name):
+        if self.location.monster != 0 and self.location.monster.name.lower() == monster_name.lower():
+            random_number = random.randint(0, self.attack + self.location.monster.defense)
+
+            if random_number > self.location.moster.defense:
+                damage = random_number - self.location.monster.defense
+                self.location.monster.health -= damage
+
+                print(f"you hit the {self.location.monster.name} and dealt {damage} damage")
+            else:
+                print(f"you missed")
+
+            random_number = random.randint(0, self.location.monster.attack + self.defense)
+
+            if random_number > self.defense:
+                damage = random_number - self.defense
+                self.health -= damage
+                
+                print(f"the {self.location.monster.name} hit you and dealt {damage} damage")
+            else:
+                print(f"the {self.location.monster.name} missed")
+
+                if self.location.monster.health <= 0:
+                    print(f"you defeated the {self.location.monster.name}")
+                    self.location.monster = 0
+                    if self.health <= 0:
+                        print("you have been defeated")
+                    else:
+                        print("no such monster here")
+         
+
+     
