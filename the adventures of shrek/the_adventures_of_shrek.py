@@ -174,6 +174,7 @@ class Potion(Item):
         Player.heal(Player.max_health)
         Player.inventory.remove(self)
 
+<<<<<<< HEAD
 class Forest(location):
     def __init__(self, name,discription):
         Location.__init__(self, name, discription)
@@ -196,3 +197,4 @@ class Forest(location):
                 print("you see a sword and shield.")
             else:
               print("you do not find anything")
+
