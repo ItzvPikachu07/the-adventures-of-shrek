@@ -141,7 +141,7 @@ class Player:
         if self.location.monster != 0 and self.location.monster.name.lower() == monster_name.lower():
             random_number = random.randint(0, self.attack + self.location.monster.defense)
 
-            if random_number > self.location.moster.defense:
+            if random_number > self.location.monster.defense:
                 damage = random_number - self.location.monster.defense
                 self.location.monster.health -= damage
 
