@@ -174,8 +174,7 @@ class Potion(Item):
         Player.heal(Player.max_health)
         Player.inventory.remove(self)
 
-<<<<<<< HEAD
-class Forest(location):
+class Forest(Location):
     def __init__(self, name,discription):
         Location.__init__(self, name, discription)
         self.skeleton_examined = False
